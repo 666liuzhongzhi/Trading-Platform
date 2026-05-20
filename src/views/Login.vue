@@ -124,59 +124,83 @@
 </script>
 
 <style scoped>
-	.login-page {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		min-height: 70vh;
-	}
+.login-page {
+  display: flex; justify-content: center; align-items: center;
+  min-height: 80vh; position: relative; overflow: hidden;
+}
+/* 浮动装饰圆 */
+.login-page::before,
+.login-page::after {
+  content: ''; position: absolute; border-radius: 50%; z-index: 0;
+  opacity: 0.3; pointer-events: none;
+}
+.login-page::before {
+  width: 320px; height: 320px;
+  background: linear-gradient(135deg, #E85D3F, #F2A65C);
+  top: -80px; right: -60px;
+  animation: float 6s ease-in-out infinite;
+}
+.login-page::after {
+  width: 220px; height: 220px;
+  background: linear-gradient(135deg, #E84A7F, #F5A0B5);
+  bottom: -40px; left: -30px;
+  animation: float 6s ease-in-out infinite reverse;
+}
 
-	.login-card {
-		width: 420px;
-		padding: 40px 30px;
-		border-radius: 16px;
-		border: 1px solid #f0f0f0;
-	}
+.login-card {
+  width: 420px; padding: 40px 30px;
+  border-radius: var(--radius-lg); position: relative; z-index: 1;
+  border: none; box-shadow: var(--shadow-lg); animation: scaleIn 0.5s ease;
+}
+/* 卡片顶部渐变色条 */
+.login-card :deep(.el-card__body) {
+  position: relative; padding-top: 8px;
+}
+.login-card :deep(.el-card__body)::before {
+  content: ''; position: absolute; top: 0; left: 24px; right: 24px;
+  height: 3px;
+  background: linear-gradient(90deg, #E85D3F, #F2A65C, #E84A7F);
+  border-radius: 0 0 4px 4px;
+}
 
-	.login-header {
-		text-align: center;
-		margin-bottom: 32px;
-	}
+.login-header { text-align: center; margin-bottom: 32px; }
+.login-header h2 {
+  font-size: 26px; margin-bottom: 6px;
+  background: linear-gradient(135deg, #2D221C, #E85D3F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.login-header p { color: var(--text-secondary); font-size: 14px; }
 
-	.login-header h2 {
-		font-size: 24px;
-		color: #1a1a1a;
-	}
+/* 输入框 */
+.login-card :deep(.el-input__wrapper) {
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-normal);
+  transition: all var(--transition-base);
+  box-shadow: none !important;
+}
+.login-card :deep(.el-input__wrapper:focus-within),
+.login-card :deep(.el-input__wrapper:hover) {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(232, 93, 63, 0.1) !important;
+}
 
-	.login-header p {
-		color: #999;
-		font-size: 14px;
-	}
+/* 登录按钮 */
+.login-btn {
+  width: 100%; height: 48px; border-radius: var(--radius-xl);
+  font-size: 16px; font-weight: 600; border: none;
+  background: var(--primary-gradient);
+  transition: all var(--transition-base);
+  position: relative; overflow: hidden;
+}
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232, 93, 63, 0.35);
+}
+.login-btn:active { transform: translateY(0) scale(0.98); }
 
-	.login-btn {
-		width: 100%;
-		height: 44px;
-		border-radius: 22px;
-		font-size: 16px;
-	}
-
-	.switch-text {
-		text-align: center;
-		font-size: 14px;
-		color: #999;
-		margin-top: 10px;
-	}
-
-	.switch-text span {
-		color: #1677ff;
-		cursor: pointer;
-		font-weight: 500;
-	}
-
-	.demo-tip {
-		text-align: center;
-		margin-top: 12px;
-		font-size: 12px;
-		color: #ccc;
-	}
+.switch-text { text-align: center; font-size: 14px; color: var(--text-secondary); margin-top: 10px; }
+.switch-text span { color: var(--primary); cursor: pointer; font-weight: 500; }
+.demo-tip { text-align: center; margin-top: 14px; font-size: 12px; color: var(--text-disabled); }
 </style>

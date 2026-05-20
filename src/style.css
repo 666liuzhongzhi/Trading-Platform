@@ -1,25 +1,199 @@
+/* ====== 暖调编辑风市集 · 设计代币 ====== */
 :root {
-  --primary: #1677ff;
-  --primary-light: #4096ff;
-  --primary-bg: rgba(22, 119, 255, 0.08);
-  --text: #555;
-  --text-secondary: #8c8c8c;
-  --text-heading: #1a1a1a;
-  --bg: #f5f7fa;
-  --bg-white: #ffffff;
-  --border: #f0f0f0;
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  /* 品牌色 — 活力赤陶 */
+  --primary: #E85D3F;
+  --primary-dark: #C4452D;
+  --primary-light: #F0856E;
+  --primary-bg: rgba(232, 93, 63, 0.07);
+  --primary-gradient: linear-gradient(135deg, #E85D3F, #F2A65C);
+
+  /* 辅色 */
+  --accent-blue: #2D9CDB;
+  --accent-blue-bg: rgba(45, 156, 219, 0.07);
+  --accent-pink: #E84A7F;
+  --accent-pink-bg: rgba(232, 74, 127, 0.07);
+  --accent-orange: #F2A65C;
+  --accent-orange-bg: rgba(242, 166, 92, 0.07);
+  --accent-green: #5EBE7E;
+  --accent-green-bg: rgba(94, 190, 126, 0.07);
+  --accent-purple: #7C5CBF;
+  --accent-purple-bg: rgba(124, 92, 191, 0.07);
+  --accent-cyan: #3D9E9E;
+  --accent-cyan-bg: rgba(61, 158, 158, 0.07);
+
+  /* 语义色 */
+  --success: #5EBE7E;
+  --success-bg: rgba(94, 190, 126, 0.08);
+  --warning: #F2A65C;
+  --warning-bg: rgba(242, 166, 92, 0.08);
+  --danger: #E8483C;
+  --danger-bg: rgba(232, 72, 60, 0.06);
+  --info: #978F88;
+
+  /* 文字 */
+  --text-heading: #2D221C;
+  --text-body: #5C4E44;
+  --text-secondary: #978F88;
+  --text-disabled: #C4BDB6;
+
+  /* 表面 */
+  --bg-page: #FBF7F0;
+  --bg-white: #FFFFFF;
+  --bg-warm: #FFF9F5;
+  --border-light: #EDE8E2;
+  --border-normal: #D9D2C9;
+
+  /* 玻璃拟态 */
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(45, 34, 28, 0.06);
+  --glass-blur: 14px;
+
+  /* 阴影 — 暖色调 */
+  --shadow-xs: 0 1px 3px rgba(45, 34, 28, 0.04);
+  --shadow-sm: 0 2px 8px rgba(45, 34, 28, 0.06);
+  --shadow-md: 0 4px 16px rgba(45, 34, 28, 0.08);
+  --shadow-lg: 0 8px 32px rgba(45, 34, 28, 0.12);
+  --shadow-xl: 0 12px 48px rgba(45, 34, 28, 0.16);
+  --shadow-primary: 0 4px 18px rgba(232, 93, 63, 0.3);
+  --shadow-danger: 0 4px 16px rgba(232, 72, 60, 0.28);
+  --shadow-success: 0 4px 16px rgba(94, 190, 126, 0.25);
+
+  /* 圆角 */
+  --radius-xs: 6px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* 过渡 */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 字体 */
+  --font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+
+  font-family: var(--font-family);
   font-size: 15px;
   line-height: 1.6;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--text-body);
+  background: var(--bg-page);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ====== Element Plus 全局覆盖 ====== */
+:root {
+  --el-color-primary: #E85D3F;
+  --el-color-primary-light-3: #F0856E;
+  --el-color-primary-light-5: #F5A898;
+  --el-color-primary-light-7: #F9C5BA;
+  --el-color-primary-light-9: #FDE2DC;
+  --el-color-primary-dark-2: #C4452D;
+  --el-color-success: #5EBE7E;
+  --el-color-warning: #F2A65C;
+  --el-color-danger: #E8483C;
+  --el-color-info: #978F88;
+  --el-border-radius-base: 8px;
+  --el-border-radius-round: 20px;
+  --el-font-size-base: 15px;
+  --el-bg-color: #FFFFFF;
+  --el-bg-color-page: #FBF7F0;
+  --el-border-color: #EDE8E2;
+  --el-text-color-primary: #2D221C;
+  --el-text-color-regular: #5C4E44;
+  --el-text-color-secondary: #978F88;
+}
+
+/* ====== 重置 ====== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); min-height: 100vh; }
+body { background: var(--bg-page); min-height: 100vh; }
+
+/* ====== 自定义滚动条 ====== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(45, 34, 28, 0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(45, 34, 28, 0.25); }
+
+/* ====== 关键帧动画 ====== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -300px 0; }
+  100% { background-position: calc(300px + 100%) 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 93, 63, 0.4); }
+  50%      { box-shadow: 0 0 0 10px rgba(232, 93, 63, 0.06); }
+}
+@keyframes pulseGlowGreen {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(94, 190, 126, 0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(94, 190, 126, 0.08); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-10px) rotate(2deg); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ====== 工具类 ====== */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ====== Element Plus 组件微调 ====== */
+.el-button--primary {
+  --el-button-bg-color: var(--primary);
+  --el-button-border-color: var(--primary);
+  --el-button-hover-bg-color: var(--primary-dark);
+  --el-button-hover-border-color: var(--primary-dark);
+  --el-button-active-bg-color: var(--primary-dark);
+}
+.el-tag {
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+.el-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+}
+.el-dialog {
+  border-radius: var(--radius-lg);
+}
+.el-menu {
+  border-right: none;
+}

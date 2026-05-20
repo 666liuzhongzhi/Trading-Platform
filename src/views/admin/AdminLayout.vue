@@ -111,25 +111,56 @@ onMounted(fetchStats)
 </script>
 
 <style scoped>
-.admin-page { max-width: 1100px; margin: 0 auto; }
+.admin-page { max-width: 1100px; margin: 0 auto; animation: fadeIn 0.4s ease; }
 .admin-header { text-align: center; margin-bottom: 30px; }
-.admin-header h2 { font-size: 26px; color: #1a1a1a; margin-bottom: 6px; }
-.subtitle { color: #999; font-size: 14px; }
+.admin-header h2 {
+  font-size: 28px; margin-bottom: 6px;
+  background: linear-gradient(135deg, #2D221C, #434343);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.subtitle { color: var(--text-secondary); font-size: 14px; }
 
 .stats-row { margin-bottom: 30px; }
 .stat-card {
-  background: white; border-radius: 12px; padding: 20px;
+  background: white; border-radius: var(--radius-md); padding: 24px 20px;
   display: flex; align-items: center; gap: 16px; cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #f0f0f0;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-light); box-shadow: var(--shadow-xs);
+  transition: all var(--transition-base); position: relative; overflow: hidden;
 }
-.stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
-.stat-icon { width: 48px; height: 48px; background: #ebf1ff; color: #1677ff; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 22px; }
-.stat-card.warning .stat-icon { background: #fff3e0; color: #e6a23c; }
-.stat-card.success .stat-icon { background: #e0f2f1; color: #67c23a; }
+.stat-card::after {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 80px; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--primary-bg));
+  pointer-events: none; opacity: 0; transition: opacity var(--transition-base);
+}
+.stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.stat-card:hover::after { opacity: 1; }
+
+.stat-icon {
+  width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-sm); font-size: 24px;
+  background: linear-gradient(135deg, #E6F0FF, #BAE0FF);
+  color: var(--accent-blue);
+  transition: transform var(--transition-fast);
+}
+.stat-card:hover .stat-icon { transform: scale(1.1); }
+
+/* 不同统计卡片的图标配色 */
+.stat-card:nth-child(1) .stat-icon { background: linear-gradient(135deg, #FFF0EB, #FDDCD3); color: var(--primary); }
+.stat-card:nth-child(3) .stat-icon { background: linear-gradient(135deg, #FFF6EA, #FFECD0); color: var(--warning); }
+.stat-card:nth-child(4) .stat-icon { background: linear-gradient(135deg, #EDF8F1, #D4F0DC); color: var(--success); }
+
 .stat-content { flex: 1; }
-.stat-label { font-size: 13px; color: #999; margin-bottom: 4px; }
-.stat-value { font-size: 24px; font-weight: 700; color: #1a1a1a; }
+.stat-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+.stat-value {
+  font-size: 26px; font-weight: 700; color: var(--text-heading);
+  animation: countUp 0.6s ease both;
+}
+.stat-card:nth-child(2) .stat-value { animation-delay: 0.1s; }
+.stat-card:nth-child(3) .stat-value { animation-delay: 0.2s; }
+.stat-card:nth-child(4) .stat-value { animation-delay: 0.3s; }
 
 .admin-tabs { margin-top: 10px; }
 </style>
