@@ -58,20 +58,14 @@ onMounted(fetchBought)
 </script>
 
 <style scoped>
-.content-title { font-size: 18px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); color: var(--text-heading); }
+.content-title { font-size: 18px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0; }
 .goods-list { display: flex; flex-direction: column; gap: 12px; }
-.goods-item {
-  display: flex; align-items: center; gap: 16px; padding: 14px;
-  border-radius: var(--radius-sm); border: 1px solid var(--border-light);
-  cursor: pointer; transition: all var(--transition-base); background: white;
-}
-.goods-item:hover { background: var(--bg-warm); border-color: var(--primary); box-shadow: 0 4px 16px rgba(232, 93, 63, 0.08); transform: translateY(-1px); }
-.goods-item-img { width: 80px; height: 60px; border-radius: var(--radius-xs); object-fit: cover; }
+.goods-item { display: flex; align-items: center; gap: 16px; padding: 12px; border-radius: 8px; border: 1px solid #f0f0f0; cursor: pointer; transition: 0.2s; }
+.goods-item:hover { background: #f9f9f9; }
+.goods-item-img { width: 80px; height: 60px; border-radius: 6px; object-fit: cover; }
 .goods-item-info { flex: 1; }
-.goods-item-name { font-size: 14px; margin-bottom: 4px; color: var(--text-heading); }
-.goods-item-price { color: var(--danger); font-weight: 600; }
-.goods-item-seller, .goods-item-address { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.goods-item-name { font-size: 14px; margin-bottom: 4px; }
+.goods-item-price { color: #ff4d4f; font-weight: 600; }
+.goods-item-seller, .goods-item-address { font-size: 12px; color: #666; margin-top: 2px; }
 .goods-item-actions { display: flex; align-items: center; gap: 8px; }
-.goods-item-actions :deep(.el-tag--warning) { background: linear-gradient(135deg, #FFF6EA, #FFECD0); color: #D4771C; border: none; }
-.goods-item-actions :deep(.el-tag--success) { background: linear-gradient(135deg, #EDF8F1, #D4F0DC); color: #2D8A4E; border: none; }
 </style>

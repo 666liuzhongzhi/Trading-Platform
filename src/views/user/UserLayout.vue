@@ -83,51 +83,18 @@ onMounted(() => { fetchUserInfo(); fetchStats() })
 </script>
 
 <style scoped>
-.user-page { max-width: 1000px; margin: 0 auto; animation: fadeIn 0.4s ease; }
-.profile-card { border-radius: var(--radius-lg); text-align: center; border: 1px solid var(--border-light); box-shadow: var(--shadow-xs); }
-.profile-header { padding: 24px 0 16px; }
+.user-page { max-width: 1000px; margin: 0 auto; }
+.profile-card { border-radius: 16px; text-align: center; border: 1px solid #f0f0f0; }
+.profile-header { padding: 20px 0; }
 .avatar-wrapper { position: relative; display: inline-block; cursor: pointer; }
-.avatar-mask {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: rgba(0,0,0,0.4); color: white; font-size: 12px;
-  padding: 4px 0; border-radius: 0 0 40px 40px; opacity: 0;
-  transition: opacity var(--transition-fast);
-}
+.avatar-mask { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.4); color: white; font-size: 12px; padding: 4px 0; border-radius: 0 0 40px 40px; opacity: 0; transition: 0.2s; }
 .avatar-wrapper:hover .avatar-mask { opacity: 1; }
-.profile-avatar {
-  margin-bottom: 10px;
-  border: 3px solid transparent;
-  background: linear-gradient(135deg, #E85D3F, #F2A65C) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
-.profile-name { font-size: 18px; margin-bottom: 4px; color: var(--text-heading); }
-.profile-bio { color: var(--text-secondary); font-size: 13px; }
+.profile-avatar { margin-bottom: 10px; }
+.profile-name { font-size: 18px; margin-bottom: 4px; }
+.profile-bio { color: #999; font-size: 13px; }
 .profile-stats { display: flex; justify-content: space-around; padding: 16px 0; }
-.stat-item {
-  display: flex; flex-direction: column; padding: 8px 16px;
-  border-radius: var(--radius-sm); transition: all var(--transition-fast);
-}
-.stat-item:hover { background: var(--primary-bg); transform: translateY(-2px); }
-.stat-value { font-size: 22px; font-weight: 700; color: var(--primary); }
-.stat-label { font-size: 12px; color: var(--text-secondary); }
-
-/* 菜单激活状态 */
-.profile-card :deep(.el-menu-item.is-active) {
-  background: linear-gradient(90deg, var(--primary-bg), transparent);
-  border-right: 3px solid var(--primary);
-  color: var(--primary); font-weight: 600;
-}
-.profile-card :deep(.el-menu-item) {
-  border-right: 3px solid transparent; transition: all var(--transition-fast);
-}
-.profile-card :deep(.el-menu-item:hover) {
-  background: linear-gradient(90deg, rgba(232,93,63,0.03), transparent);
-}
-
-.content-card {
-  border-radius: var(--radius-lg); border: 1px solid var(--border-light);
-  min-height: 400px; padding: 24px; box-shadow: var(--shadow-xs);
-}
+.stat-item { display: flex; flex-direction: column; }
+.stat-value { font-size: 20px; font-weight: 700; color: #1a1a1a; }
+.stat-label { font-size: 12px; color: #999; }
+.content-card { border-radius: 16px; border: 1px solid #f0f0f0; min-height: 400px; padding: 20px; }
 </style>

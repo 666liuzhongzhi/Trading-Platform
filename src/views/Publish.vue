@@ -177,49 +177,23 @@ const handlePublish = async () => {
 
 <style scoped>
 .publish-page { max-width: 800px; margin: 0 auto; }
-.publish-card {
-  border-radius: var(--radius-lg); padding: 30px;
-  border: 1px solid var(--border-light); position: relative;
-  box-shadow: var(--shadow-sm);
-}
-/* 标题底部渐变色条 */
+.publish-card { border-radius: 16px; padding: 30px; border: 1px solid #f0f0f0; }
 .publish-header { text-align: center; margin-bottom: 32px; }
-.publish-header h2 {
-  font-size: 24px; margin-bottom: 8px; color: var(--text-heading);
-}
-.publish-header::after {
-  content: ''; display: block; width: 48px; height: 3px;
-  background: var(--primary-gradient); border-radius: 2px;
-  margin: 12px auto 0;
-}
-.subtitle { color: var(--text-secondary); font-size: 14px; }
-
+.publish-header h2 { font-size: 24px; margin-bottom: 8px; color: #1a1a1a; }
+.subtitle { color: #999; font-size: 14px; }
 .upload-wrapper { display: flex; flex-direction: column; gap: 12px; }
 .upload-trigger {
-  width: 120px; height: 100px; border: 2px dashed var(--border-normal); border-radius: var(--radius-sm);
+  width: 120px; height: 100px; border: 1px dashed #ddd; border-radius: 8px;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  cursor: pointer; transition: all var(--transition-base); color: var(--text-secondary); font-size: 13px;
+  cursor: pointer; transition: 0.2s; color: #666; font-size: 13px;
 }
-.upload-trigger:hover {
-  border-color: var(--primary); color: var(--primary);
-  background: linear-gradient(135deg, rgba(232,93,63,0.02), rgba(232,93,63,0.06));
-}
+.upload-trigger:hover { border-color: #1677ff; color: #1677ff; }
 .preview-list { display: flex; gap: 8px; flex-wrap: wrap; }
-.preview-item { position: relative; width: 80px; height: 80px; border-radius: var(--radius-xs); overflow: hidden; }
+.preview-item { position: relative; width: 80px; height: 80px; border-radius: 6px; overflow: hidden; }
 .preview-item img { width: 100%; height: 100%; object-fit: cover; }
 .remove-btn {
   position: absolute; top: 2px; right: 2px; background: rgba(0,0,0,0.5); color: white;
   border-radius: 50%; cursor: pointer; font-size: 14px;
 }
-.submit-btn {
-  width: 100%; border-radius: var(--radius-xl); height: 52px;
-  font-size: 16px; font-weight: 600; margin-top: 20px;
-  background: var(--primary-gradient); border: none;
-  transition: all var(--transition-base);
-}
-.submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(232, 93, 63, 0.35);
-}
-.submit-btn:active { transform: translateY(0) scale(0.98); }
+.submit-btn { width: 100%; border-radius: 24px; height: 48px; font-size: 16px; margin-top: 20px; }
 </style>

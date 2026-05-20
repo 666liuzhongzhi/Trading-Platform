@@ -225,27 +225,67 @@ onMounted(fetchMyGoods)
 </script>
 
 <style scoped>
-.content-title { font-size: 18px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light); color: var(--text-heading); }
-.goods-list { display: flex; flex-direction: column; gap: 12px; }
+.content-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.goods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 .goods-item {
-  display: flex; align-items: center; gap: 16px; padding: 14px;
-  border-radius: var(--radius-sm); border: 1px solid var(--border-light);
-  cursor: pointer; transition: all var(--transition-base); background: white;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: 0.2s;
 }
 .goods-item:hover {
-  background: var(--bg-warm); border-color: var(--primary);
-  box-shadow: 0 4px 16px rgba(232, 93, 63, 0.08);
-  transform: translateY(-1px);
+  background: #f9f9f9;
 }
-.goods-item-img { width: 80px; height: 60px; border-radius: var(--radius-xs); object-fit: cover; }
-.goods-item-info { flex: 1; }
-.goods-item-name { font-size: 14px; margin-bottom: 4px; color: var(--text-heading); }
-.goods-item-price { color: var(--danger); font-weight: 600; }
-.goods-item-actions { display: flex; align-items: center; gap: 8px; }
-.goods-item-actions :deep(.el-tag--warning) { background: linear-gradient(135deg, #FFF6EA, #FFECD0); color: #D4771C; border: none; }
-.goods-item-actions :deep(.el-tag--success) { background: linear-gradient(135deg, #EDF8F1, #D4F0DC); color: #2D8A4E; border: none; }
-.goods-item-actions :deep(.el-tag--info) { background: linear-gradient(135deg, #F5F3F0, #E8E4DE); color: #6B635B; border: none; }
-.edit-upload { display: flex; flex-direction: column; gap: 8px; }
-.preview-list { display: flex; gap: 6px; flex-wrap: wrap; }
-.preview-thumb { width: 80px; height: 60px; object-fit: cover; border-radius: var(--radius-xs); border: 1px solid var(--border-light); }
+.goods-item-img {
+  width: 80px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+.goods-item-info {
+  flex: 1;
+}
+.goods-item-name {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.goods-item-price {
+  color: #ff4d4f;
+  font-weight: 600;
+}
+.goods-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.edit-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.preview-list {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.preview-thumb {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
 </style>

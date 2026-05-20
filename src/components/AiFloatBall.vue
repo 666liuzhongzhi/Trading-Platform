@@ -234,62 +234,63 @@ onMounted(() => {
 <style scoped>
 .ai-float { position: fixed; right: 24px; bottom: 24px; z-index: 1000; }
 
+/* 悬浮球 */
 .ai-ball {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--primary-gradient);
-  color: white; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; box-shadow: 0 4px 20px rgba(232, 93, 63, 0.4);
-  transition: all var(--transition-base); user-select: none;
-  animation: pulseGlow 3s infinite;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--primary, #1677ff);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(22,119,255,0.35);
+  transition: 0.3s;
+  user-select: none;
 }
-.ai-ball:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(232, 93, 63, 0.5); }
-.ai-ball.active {
-  animation: none; background: #fff; color: var(--text-body);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.12); transform: rotate(90deg);
-}
+.ai-ball:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(22,119,255,0.45); }
+.ai-ball.active { background: #fff; color: var(--text, #555); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
 
+/* 面板 */
 .ai-panel {
-  position: absolute; right: 0; bottom: 72px;
+  position: absolute;
+  right: 0; bottom: 68px;
   width: 380px; height: 520px;
-  background: white; border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xl); display: flex; flex-direction: column;
+  background: white;
+  border-radius: var(--radius-md, 12px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  display: flex; flex-direction: column;
   overflow: hidden;
 }
-.ai-panel-enter-active { transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+.ai-panel-enter-active { transition: 0.25s ease; }
 .ai-panel-leave-active { transition: 0.2s ease; }
 .ai-panel-enter-from, .ai-panel-leave-to {
   opacity: 0; transform: translateY(12px) scale(0.96);
 }
 
+/* 头部 */
 .ai-panel-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 16px;
-  background: linear-gradient(135deg, #FFF9F5, #FFFFFF);
-  border-bottom: 1px solid rgba(232, 93, 63, 0.1);
+  border-bottom: 1px solid var(--border, #f0f0f0);
 }
-.ai-panel-title { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--text-heading); }
-.ai-dot {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: linear-gradient(135deg, #5EBE7E, #8ED4A0);
-  box-shadow: 0 0 6px rgba(94, 190, 126, 0.4);
-  animation: pulseGlowGreen 2s infinite;
-}
+.ai-panel-title { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--text-heading, #1a1a1a); }
+.ai-dot { width: 8px; height: 8px; border-radius: 50%; background: #52c41a; }
 .ai-panel-actions { display: flex; align-items: center; gap: 4px; }
-.session-btn, .close-btn { color: var(--text-secondary); padding: 4px; }
-.is-active { background: var(--primary-bg); color: var(--primary); }
+.session-btn, .close-btn { color: var(--text-secondary, #8c8c8c); padding: 4px; }
+.is-active { background: var(--primary-bg, rgba(22,119,255,0.08)); color: var(--primary, #1677ff); }
 .del-session-btn { float: right; padding: 0; margin-left: 8px; color: #ccc; }
-.del-session-btn:hover { color: #E8483C; }
+.del-session-btn:hover { color: #ff4d4f; }
 
+/* 消息区 */
 .ai-messages {
   flex: 1; overflow-y: auto; padding: 16px;
   display: flex; flex-direction: column; gap: 14px;
-  background: linear-gradient(180deg, #FBF7F0, #FFF9F5);
+  background: var(--bg, #f5f7fa);
 }
-.ai-welcome { text-align: center; padding: 40px 20px; color: var(--text-secondary); animation: fadeIn 0.5s ease; }
+.ai-welcome { text-align: center; padding: 40px 20px; color: var(--text-secondary, #8c8c8c); }
 .welcome-icon { font-size: 40px; display: block; margin-bottom: 12px; }
 .welcome-sub { font-size: 13px; margin-top: 4px; }
 
-.ai-msg { display: flex; animation: fadeInUp 0.3s ease both; }
+.ai-msg { display: flex; }
 .ai-msg.user { justify-content: flex-end; }
 .ai-msg-bubble { display: flex; align-items: flex-start; gap: 8px; max-width: 85%; }
 .msg-avatar { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
@@ -298,16 +299,16 @@ onMounted(() => {
   font-size: 14px; line-height: 1.65; white-space: pre-wrap; word-break: break-word;
 }
 .ai-msg.user .msg-content {
-  background: var(--primary-gradient); color: white;
+  background: var(--primary, #1677ff); color: white;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 2px 8px rgba(232, 93, 63, 0.2);
 }
 .ai-msg.assistant .msg-content {
-  background: white; color: var(--text-body);
+  background: white; color: var(--text, #555);
   border-bottom-left-radius: 4px;
-  box-shadow: 0 1px 3px rgba(45, 34, 28, 0.04);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
+/* 打字动画 */
 .typing { display: flex; gap: 4px; align-items: center; padding: 14px 18px; }
 .typing span {
   width: 6px; height: 6px; border-radius: 50%; background: #bbb;
@@ -320,17 +321,17 @@ onMounted(() => {
   30% { transform: translateY(-6px); }
 }
 
+/* 输入区 */
 .ai-input {
   display: flex; align-items: center; gap: 8px;
-  padding: 12px 16px; border-top: 1px solid var(--border-light);
+  padding: 12px 16px; border-top: 1px solid var(--border, #f0f0f0);
 }
 .ai-input :deep(.el-input__wrapper) {
-  border-radius: var(--radius-full); background: var(--bg-page);
+  border-radius: 20px; background: var(--bg, #f5f7fa);
   border: none; box-shadow: none;
 }
 .send-btn {
   width: 36px; height: 36px; border-radius: 50%;
   flex-shrink: 0; padding: 0;
-  background: var(--primary-gradient); border: none;
 }
 </style>

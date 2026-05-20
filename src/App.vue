@@ -33,11 +33,7 @@
     </header>
 
     <main class="container">
-      <router-view v-slot="{ Component }">
-        <transition name="page-fade" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <router-view />
     </main>
 
     <footer class="footer">
@@ -118,85 +114,20 @@ const logout = () => {
 
 
 <style scoped>
-.app { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg-page); }
-
-/* 导航栏 — 玻璃拟态 */
-.header {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: 0 1px 8px rgba(45, 34, 28, 0.04);
-  position: sticky; top: 0; z-index: 100;
-}
-.header-inner {
-  max-width: 1200px; margin: 0 auto; padding: 0 24px;
-  height: 64px; display: flex; align-items: center; justify-content: space-between;
-}
+.app { min-height: 100vh; display: flex; flex-direction: column; background: #f5f7fa; }
+.header { background: white; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
 .logo { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.logo-text {
-  font-size: 22px; font-weight: 700;
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* 导航链接 — 下划线动画 */
+.logo-text { font-size: 20px; font-weight: 700; color: #1677ff; }
 .nav { display: flex; gap: 4px; }
-.nav .el-button {
-  color: var(--text-body); padding: 8px 16px; border-radius: var(--radius-sm);
-  font-weight: 500; position: relative; transition: color var(--transition-base);
-}
-.nav .el-button::after {
-  content: ''; position: absolute; bottom: 2px; left: 50%;
-  width: 0; height: 2.5px;
-  background: var(--primary-gradient); border-radius: 2px;
-  transition: width var(--transition-base), left var(--transition-base);
-}
-.nav .el-button:hover { color: var(--primary); }
-.nav .el-button:hover::after,
-.nav .el-button.active::after { width: 60%; left: 20%; }
-.nav .el-button.active {
-  color: var(--primary); font-weight: 600;
-  background: var(--primary-bg);
-}
-
+.nav .el-button { color: #666; padding: 8px 16px; border-radius: 8px; }
+.nav .el-button.active { color: #1677ff; background: rgba(22,119,255,0.08); }
 .header-right { display: flex; align-items: center; gap: 16px; }
-.user-info { display: flex; align-items: center; gap: 8px; cursor: pointer; transition: transform var(--transition-fast); }
-.user-info:hover { transform: scale(1.04); }
-.user-avatar {
-  background: var(--primary-gradient);
-  transition: box-shadow var(--transition-fast);
-}
-.user-info:hover .user-avatar {
-  box-shadow: 0 0 0 3px rgba(232, 93, 63, 0.25);
-}
+.user-info { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.user-avatar { background: #1677ff; }
 .msg-badge { margin-right: 4px; }
-
-.btn-outline {
-  border: 1.5px solid var(--border-normal); border-radius: var(--radius-full);
-  padding: 6px 20px; color: var(--text-body); font-weight: 500;
-  transition: all var(--transition-base);
-}
-.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-.btn-primary { border-radius: var(--radius-full); padding: 6px 20px; font-weight: 500; }
-
+.btn-outline { border: 1px solid #ddd; border-radius: 20px; padding: 6px 20px; }
+.btn-primary { border-radius: 20px; padding: 6px 20px; }
 .container { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 24px; }
-
-/* 页脚 */
-.footer {
-  background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-page) 100%);
-  border-top: 1px solid var(--border-light);
-  margin-top: auto; padding: 20px; text-align: center;
-  color: var(--text-secondary); font-size: 13px;
-}
-
-/* 页面过渡 */
-.page-fade-enter-active,
-.page-fade-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.page-fade-enter-from { opacity: 0; transform: translateY(8px); }
-.page-fade-leave-to   { opacity: 0; transform: translateY(-6px); }
+.footer { background: white; border-top: 1px solid #f0f0f0; margin-top: auto; padding: 20px; text-align: center; color: #999; font-size: 13px; }
 </style>
