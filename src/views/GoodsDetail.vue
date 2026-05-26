@@ -134,8 +134,27 @@
       </div>
     </el-dialog>
 
-    <!-- 地址填写弹窗（省市区 + 详细地址） -->
-    <el-dialog v-model="addressDialogVisible" title="填写收货地址" width="450px">
+    <!-- 地址填写弹窗（支持选择已保存地址） -->
+    <el-dialog v-model="addressDialogVisible" title="填写收货地址" width="500px">
+      <!-- 已保存地址 -->
+      <div v-if="savedAddresses.length > 0" class="saved-addresses">
+        <div class="section-label">已保存的地址（点击选择）</div>
+        <div
+          v-for="addr in savedAddresses"
+          :key="addr.id"
+          class="saved-addr-item"
+          :class="{ 'is-selected': selectedAddrId === addr.id }"
+          @click="selectSavedAddress(addr)"
+        >
+          <div class="addr-summary">
+            <span class="addr-receiver">{{ addr.receiverName }}</span>
+            <span class="addr-phone">{{ addr.phone }}</span>
+            <el-tag v-if="addr.isDefault === 1" type="danger" size="small">默认</el-tag>
+          </div>
+          <div class="addr-full">{{ addr.province }}{{ addr.city }}{{ addr.district }} {{ addr.detail }}</div>
+        </div>
+        <el-divider />
+      </div>
       <el-form :model="addressForm" label-width="80px">
         <el-form-item label="收件人">
           <el-input v-model="addressForm.receiverName" placeholder="请输入收件人姓名" />
@@ -162,6 +181,10 @@
         </el-row>
         <el-form-item label="详细地址">
           <el-input v-model="addressForm.detail" type="textarea" placeholder="街道、门牌号等" />
+        </el-form-item>
+        <el-form-item label="保存地址">
+          <el-switch v-model="addressForm.saveAddress" />
+          <span class="form-tip">将此地址保存到地址簿</span>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -217,13 +240,16 @@ const sellerGoods = ref([])
 
 const orderShipped = ref(false)
 const addressDialogVisible = ref(false)
+const savedAddresses = ref([])
+const selectedAddrId = ref(null)
 const addressForm = ref({
   receiverName: '',
   phone: '',
   province: '',
   city: '',
   district: '',
-  detail: ''
+  detail: '',
+  saveAddress: false
 })
 
 const tradeLocation = computed(() => {
@@ -301,12 +327,14 @@ const handleBuy = async () => {
       fetchDetail()
     } catch (e) { if (e !== 'cancel') ElMessage.error('购买失败') }
   } else if (type === 'express') {
+    fetchSavedAddresses()
     addressDialogVisible.value = true
   } else if (type === 'both') {
     try {
       await ElMessageBox.confirm('是否需要填写收货地址？', '选择交易方式', {
         confirmButtonText: '填写地址并购买', cancelButtonText: '不填，直接购买', distinguishCancelAndClose: true
       })
+      fetchSavedAddresses()
       addressDialogVisible.value = true
     } catch (e) {
       if (e === 'cancel' || e === 'close') {
@@ -319,6 +347,24 @@ const handleBuy = async () => {
       }
     }
   }
+}
+
+// 打开地址弹窗时加载已保存地址
+const fetchSavedAddresses = async () => {
+  try {
+    const res = await request.get('/address/list')
+    savedAddresses.value = res.data || []
+  } catch (e) { savedAddresses.value = [] }
+}
+
+const selectSavedAddress = (addr) => {
+  selectedAddrId.value = addr.id
+  addressForm.value.receiverName = addr.receiverName || ''
+  addressForm.value.phone = addr.phone || ''
+  addressForm.value.province = addr.province || ''
+  addressForm.value.city = addr.city || ''
+  addressForm.value.district = addr.district || ''
+  addressForm.value.detail = addr.detail || ''
 }
 
 // 填写地址后购买
@@ -339,6 +385,18 @@ const confirmAddressAndBuy = async () => {
       district: addressForm.value.district,
       detail: addressForm.value.detail
     })
+    // 用户选择保存地址到地址簿
+    if (addressForm.value.saveAddress) {
+      request.post('/address/save', {
+        receiverName: addressForm.value.receiverName,
+        phone: addressForm.value.phone,
+        province: addressForm.value.province,
+        city: addressForm.value.city,
+        district: addressForm.value.district,
+        detail: addressForm.value.detail,
+        isDefault: savedAddresses.value.length === 0 ? 1 : 0
+      }).catch(() => {})
+    }
     ElMessage.success('购买成功，已通知卖家')
     addressDialogVisible.value = false
     fetchDetail()
@@ -433,6 +491,16 @@ onMounted(fetchDetail)
 .msg-right > div { background: #1677ff; color: #fff; }
 .chat-input { display: flex; gap: 8px; }
 .text-success { color: #67c23a; font-weight: 600; margin-left: 10px; }
+.saved-addresses { margin-bottom: 10px; }
+.section-label { font-size: 13px; color: #666; margin-bottom: 8px; }
+.saved-addr-item { padding: 10px 12px; border: 1px solid #e8e8e8; border-radius: 6px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
+.saved-addr-item:hover { border-color: #1677ff; }
+.saved-addr-item.is-selected { border-color: #1677ff; background: #f0f5ff; }
+.addr-summary { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.addr-receiver { font-weight: 600; font-size: 14px; }
+.addr-phone { color: #666; font-size: 13px; }
+.addr-full { font-size: 12px; color: #888; }
+.form-tip { font-size: 12px; color: #999; margin-left: 8px; }
 .empty-state { text-align: center; padding: 80px 0; }
 .mini-goods { display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; cursor: pointer; }
 .mini-goods:hover { background: #f5f5f5; }

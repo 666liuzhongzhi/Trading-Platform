@@ -68,6 +68,9 @@
       <el-tab-pane label="操作日志" name="logs">
         <AdminLogs />
       </el-tab-pane>
+      <el-tab-pane label="订单管理" name="orders">
+        <AdminOrders />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -84,6 +87,7 @@ import AdminToday from './AdminToday.vue'
 import AdminRoles from './AdminRoles.vue'
 import AdminPermissions from './AdminPermissions.vue'
 import AdminLogs from './AdminLogs.vue'
+import AdminOrders from './AdminOrders.vue'
 
 const route = useRoute()
 const activeTab = ref('audit')
@@ -105,6 +109,7 @@ watch(() => route.path, (path) => {
   else if (path.includes('/admin/roles')) activeTab.value = 'roles'
   else if (path.includes('/admin/permissions')) activeTab.value = 'permissions'
   else if (path.includes('/admin/logs')) activeTab.value = 'logs'
+  else if (path.includes('/admin/orders')) activeTab.value = 'orders'
 }, { immediate: true })
 
 onMounted(fetchStats)

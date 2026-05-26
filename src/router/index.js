@@ -12,6 +12,7 @@ import UserBought from '../views/user/UserBought.vue'
 import UserFavorite from '../views/user/UserFavorite.vue'
 import UserHistory from '../views/user/UserHistory.vue'
 import UserEditGoods from '../views/user/UserEditGoods.vue'
+import UserAddress from '../views/user/UserAddress.vue'
 import AdminLayout from '../views/admin/AdminLayout.vue'
 
 const routes = [
@@ -32,7 +33,8 @@ const routes = [
       { path: 'bought', component: UserBought },
       { path: 'favorite', component: UserFavorite },
       { path: 'history', component: UserHistory },
-      { path: 'edit', component: UserEditGoods }  
+      { path: 'edit', component: UserEditGoods },
+      { path: 'address', component: UserAddress }
     ]
   },
   {
@@ -47,7 +49,8 @@ const routes = [
       { path: 'today', component: () => import('../views/admin/AdminToday.vue') },
       { path: 'roles', component: () => import('../views/admin/AdminRoles.vue') },
       { path: 'permissions', component: () => import('../views/admin/AdminPermissions.vue') },
-      { path: 'logs', component: () => import('../views/admin/AdminLogs.vue') }
+      { path: 'logs', component: () => import('../views/admin/AdminLogs.vue') },
+      { path: 'orders', component: () => import('../views/admin/AdminOrders.vue') }
     ]
   }
 ]

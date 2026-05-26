@@ -25,6 +25,7 @@
             <el-menu-item index="/user/bought"><el-icon><ShoppingCart /></el-icon> 我买到的</el-menu-item>
             <el-menu-item index="/user/favorite"><el-icon><Star /></el-icon> 我的收藏</el-menu-item>
             <el-menu-item index="/user/history"><el-icon><Clock /></el-icon> 浏览历史</el-menu-item>
+            <el-menu-item index="/user/address"><el-icon><Location /></el-icon> 收货地址</el-menu-item>
           </el-menu>
         </el-card>
       </el-col>
@@ -41,7 +42,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { User, Goods, Star, Clock, Sell, ShoppingCart } from '@element-plus/icons-vue'
+import { User, Goods, Star, Clock, Sell, ShoppingCart, Location } from '@element-plus/icons-vue'
 import request from '@/utils/request'
 
 const router = useRouter()

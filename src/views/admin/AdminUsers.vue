@@ -36,11 +36,16 @@
       <el-table-column prop="createTime" label="注册时间" width="120">
         <template #default="{ row }">{{ row.createTime?.substring(0,10) }}</template>
       </el-table-column>
-      <el-table-column label="操作" min-width="260" align="center">
+      <el-table-column label="操作" min-width="340" align="center">
         <template #default="{ row }">
           <el-button size="small" @click="openUserDetail(row.id)">详情</el-button>
           <el-button size="small" type="warning" @click="openEditUser(row)">编辑</el-button>
           <el-button size="small" :type="row.status === 1 ? 'info' : 'success'" @click="toggleUserStatus(row)">{{ row.status === 1 ? '禁用' : '启用' }}</el-button>
+          <el-popconfirm title="确定重置密码为123456？" @confirm="resetPassword(row)">
+            <template #reference>
+              <el-button size="small" type="warning">重置密码</el-button>
+            </template>
+          </el-popconfirm>
           <el-popconfirm title="确定删除？" @confirm="deleteUser(row)">
             <template #reference>
               <el-button size="small" type="danger">删除</el-button>
@@ -177,6 +182,13 @@ const deleteUser = async (row) => {
     ElMessage.success('已删除')
     fetchUsers()
   } catch (e) { ElMessage.error('删除失败') }
+}
+
+const resetPassword = async (row) => {
+  try {
+    await request.put('/admin/user/' + row.id + '/reset-password')
+    ElMessage.success('密码已重置为123456')
+  } catch (e) { ElMessage.error('重置失败') }
 }
 
 const fetchRoles = async () => {
